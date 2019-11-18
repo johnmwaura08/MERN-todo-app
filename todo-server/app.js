@@ -31,6 +31,7 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function() {
   console.log("connected to mongoose");
 });
+
 const Item = mongoose.model("Item", { name: String, completed: Boolean });
 
 app.post("/api/todos", (req, res) => {
@@ -40,11 +41,11 @@ app.post("/api/todos", (req, res) => {
   });
 });
 
-app.get('/api/todos',(req,res) => {
+app.get("/api/todos", (req, res) => {
   Item.find({}).then(items => {
     res.json(items);
-  })
-})
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
